@@ -11,11 +11,19 @@ class Cat < ActiveRecord::Base
     dependent: :destroy
   )
 
+  belongs_to(
+    :owner,
+    foreign_key: :user_id,
+    primary_key: :id,
+    class_name: "User"
+  )
+
   validates(
     :birth_date,
     :color,
     :name,
     :sex,
+    :owner,
     presence: true
   )
 

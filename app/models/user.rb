@@ -2,6 +2,14 @@ class User < ActiveRecord::Base
   validates :user_name, :password_digest, :session_token, presence: true
   after_initialize :ensure_session_token
 
+  has_many(
+    :cats,
+    foreign_key: :user_id,
+    primary_key: :id,
+    class_name: "Cat",
+    dependent: :destroy
+  )
+
   def self.generate_session_token
     SecureRandom::urlsafe_base64(16)
   end
