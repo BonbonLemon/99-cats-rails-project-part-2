@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>NinetyNineCatsDay1</title>
+  <title>NinetyNineCatsDay2</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+<% if current_user %>
+<h4><%= current_user.user_name %></h4>
+  <form action="<%= session_url(current_user) %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Log out!">
+  </form>
+<% else %>
+  <form action="<%= new_session_url %>" method="get">
+    <input type="submit" value="Log in!">
+  </form>
+<% end %>
 <%= yield %>
 
 </body>
