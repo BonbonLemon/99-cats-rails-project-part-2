@@ -10,6 +10,14 @@ class User < ActiveRecord::Base
     dependent: :destroy
   )
 
+  has_many(
+    :requests,
+    foreign_key: :user_id,
+    primary_key: :id,
+    class_name: "CatRentalRequest",
+    dependent: :destroy
+  )
+
   def self.generate_session_token
     SecureRandom::urlsafe_base64(16)
   end
