@@ -1,7 +1,7 @@
 class CatRentalRequestsController < ApplicationController
   before_action :confirm_owner, only: [:approve, :deny]
   before_action :requester_exists, only: [:create]
-  
+
   def approve
     current_cat_rental_request.approve!
     redirect_to cat_url(current_cat)
@@ -42,7 +42,6 @@ class CatRentalRequestsController < ApplicationController
       .permit(:cat_id, :end_date, :start_date, :status)
   end
 
-  private
   def requester_exists
     redirect_to new_cat_rental_request_url unless current_user
   end
