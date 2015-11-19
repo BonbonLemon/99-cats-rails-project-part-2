@@ -23,7 +23,7 @@ class Cat < ActiveRecord::Base
     :color,
     :name,
     :sex,
-    :owner,
+    :user_id,
     presence: true
   )
 

@@ -17,4 +17,8 @@ class ApplicationController < ActionController::Base
   def signed_in?
     redirect_to cats_url if current_user
   end
+
+  def confirm_owner
+    redirect_to cats_url unless current_user.cats.any? { |cat| cat.id = params[:id] }
+  end
 end
